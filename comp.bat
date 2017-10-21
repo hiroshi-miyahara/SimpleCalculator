@@ -3,7 +3,7 @@
 javac Calc.java
 @if ERRORLEVEL 1 goto err_exit1
 
-jar cvfm Calc.jar Calc.mf *.class jp/zousoft/calc/*.class
+jar cvfm Calc.jar Calc.mf *.class jp/zousoft/calc/*.class DSEG7Classic-BoldItalic.ttf
 
 :err_exit1
 @del *.class jp\zousoft\calc\*.class 2> nul

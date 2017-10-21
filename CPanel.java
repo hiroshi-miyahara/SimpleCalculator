@@ -1,7 +1,7 @@
 /**
 **	CPanel
 **
-**	ä»íPåvéZã@
+**	ä»íPåvéZã@ï\é¶ïîï™
 */
 
 import javax.swing.*;
@@ -17,7 +17,22 @@ public abstract class CPanel extends JFrame
 
 		mCalc = newCalculator();
 
-		JPanel	aBtn = new JPanel() {{
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(new BorderLayout());
+		getContentPane().add("Center", createNums());
+		getContentPane().add("West",   createTool());
+		getContentPane().add("North",  createFigs());
+	}
+
+	protected Calculator	mCalc;
+
+	protected abstract Calculator newCalculator();
+	protected abstract JComponent createFigs();
+	protected abstract ActionListener newActionListener(String cOp);
+
+	protected JPanel createNums()
+	{
+		return new JPanel() {{
 			setLayout(new GridLayout(4, 4));
 			add(createNumBtn(7));
 			add(createNumBtn(8));
@@ -36,8 +51,11 @@ public abstract class CPanel extends JFrame
 			add(createOpBtn("Å{", "+"));
 			add(createOpBtn("ÅÅ", "="));
 		}};
+	}
 
-		JPanel	aTool = new JPanel() {{
+	protected JPanel createTool()
+	{
+		return new JPanel() {{
 			setLayout(new GridLayout(3, 1));
 			JButton AC = createOpBtn("AC", "AC");
 			AC.setBackground(Color.RED);
@@ -45,17 +63,7 @@ public abstract class CPanel extends JFrame
 			add(createOpBtn("Çb", "CLR"));
 			add(createOpBtn("Å}", "SGN"));
 		}};
-
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add("Center", aBtn);
-		getContentPane().add("West",   aTool);
 	}
-
-	protected abstract Calculator newCalculator();
-	protected abstract ActionListener newActionListener(String cOp);
-
-	protected Calculator	mCalc;
 
 	private JButton createNumBtn(int cVal)
 	{
